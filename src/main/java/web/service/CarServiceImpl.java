@@ -12,12 +12,9 @@ public class CarServiceImpl implements CarService {
 
     @Override
     public List<Car> getCars(int count) {
-        List<Car> carList;
-//        if (count < 0)
-//            return new ArrayList<>();
-        System.out.println(count);
+        if (count < 0)
+            return new ArrayList<>();
         if (count == 0 || count >= cars.size()) {
-            System.out.println(this.cars);
             return this.cars;
         }
         return cars.stream().limit(count).toList();
