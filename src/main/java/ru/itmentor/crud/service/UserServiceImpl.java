@@ -14,6 +14,7 @@ import java.util.List;
 @Service
 @RequiredArgsConstructor
 public class UserServiceImpl implements UserService {
+
     private final UserRepository userRepository;
 
     @Override
@@ -35,19 +36,17 @@ public class UserServiceImpl implements UserService {
         user.setName(userDto.getName());
         user.setEmail(userDto.getEmail());
         user.setAge(userDto.getAge());
-        userRepository.save(user);
+        userRepository.update(user);
     }
 
     @Override
     @Transactional
     public void deleteUser(Long userId) {
-        User user = findUserById(userId);
-        userRepository.delete(user);
+        userRepository.delete(userId);
     }
 
     private User findUserById(Long userId) {
         return userRepository.findById(userId)
                 .orElseThrow(() -> new UserNotFoundException(userId));
     }
-
 }
